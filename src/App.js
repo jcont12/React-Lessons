@@ -7,8 +7,8 @@ class App extends Component {
 
   state = {
     persons: [
-      {name:"georgian", age:"30"},
-      {name:"fersh", age:"26"},
+      {name:"georgian", age:"29"},
+      {name:"fersh", age:"25"},
       {name:"hope", age:"2"}
     ],
     showPersons: false
@@ -17,7 +17,7 @@ class App extends Component {
   switchNameHandler = (newName) => {
     this.setState({
       persons: [
-        {name: newName, age:"30"},
+        {name: newName, age:"29"},
         {name:"Fer", age:"25"},
         {name:"Hope", age:"2"}
       ]
@@ -50,6 +50,18 @@ class App extends Component {
       cursor: 'pointer'
     }
 
+    let persons;
+
+    if (this.state.showPersons){
+      persons = (
+      <div>
+        {this.state.persons.map(person => {
+          return <Person name={person.name} age={person.age} />
+        })}
+      </div>
+      )
+    }
+
     return (
       <div className="App">
         <h1>Hello World</h1>
@@ -61,14 +73,7 @@ class App extends Component {
         <br></br>
         <button style={style} onClick={this.switchNameHandler.bind(this, "Jorge")}> Change Names </button>
         <Input changedName={this.inputNameHandler} name={this.state.persons[1].name}/>
-        { this.state.showPersons ?
-          <div>
-            <Person name={this.state.persons[0].name} age={this.state.persons[0].age}/>
-            <Person name={this.state.persons[1].name} age={this.state.persons[1].age}/>
-            <Person name={this.state.persons[2].name} age={this.state.persons[2].age}> I am a dog! (and a react children being passed in)</Person>
-          </div>
-          : null
-        }
+        {persons}
       </div>
     );
   }
