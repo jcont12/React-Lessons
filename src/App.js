@@ -91,7 +91,6 @@ class App extends Component {
         <br></br>
         <br></br>
         <button style={style} onClick={this.switchNameHandler.bind(this, "Jorge")}> Change Names </button>
-        <Input changedName={this.inputNameHandler} name={this.state.persons[1] ? this.state.persons[1].name : null}/>
         {persons}
       </div>
     );
