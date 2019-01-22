@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import Person from './Person/Person.js';
-import Input from './Input/Input.js';
+import Persons from '../Components/Persons/Persons.js';
+import Cockpit from '../Cockpit/Cockpit.js';
+import Input from '../Components/Input/Input.js';
 
 class App extends Component {
 
@@ -54,43 +55,27 @@ class App extends Component {
   }
 
   render() {
-
-  // different way to use css:
-    const style = {
-      backgroundColor: 'blue',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer'
-    }
-
     let persons;
 
     if (this.state.showPersons){
       persons = (
       <div>
-        {this.state.persons.map((person, index) => {
-          return <Person 
-          name={person.name}
-          age={person.age}
-          click={this.deletePersonHandler.bind(this, index)}
-          key={person.id}
-          inputChange={(event) => this.inputNameHandler(event, person.id)} />
-        })}
+        <Persons
+        persons={this.state.persons}
+        delete={this.deletePersonHandler.bind(this)}
+        input={this.inputNameHandler}
+        />
       </div>
       )
     }
 
     return (
       <div className="App">
-        <h1>Hello World</h1>
-        { this.state.showPersons ?
-        <button onClick={this.togglePersonsHandler}> Hide Names </button>
-        : <button onClick={this.togglePersonsHandler}> Show Names </button>
-        }
-        <br></br>
-        <br></br>
-        <button style={style} onClick={this.switchNameHandler.bind(this, "Jorge")}> Change Names </button>
+        <Cockpit 
+          switch={this.switchNameHandler} 
+          style={this.style} 
+          showpersons={this.state.showPersons} 
+          toggle={this.togglePersonsHandler}/>
         {persons}
       </div>
     );
